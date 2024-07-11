@@ -1,32 +1,24 @@
-import { test } from '@playwright/test';
+import { test, expect } from '@playwright/test';
 
-test.describe('With Clock', () => {
-  test('has title', async ({ page }) => {
+  test('Default approach', async ({ page }) => {
     await page.goto('https://playwright.dev/');
-  
-    // Expect a title "to contain" a substring.
     const dateValue = await page.evaluate(() => {return Date.now()});
-  
     console.log('DEFAULT: ', dateValue);
+    expect(Number.isInteger(dateValue)).toBeTruthy();
   });
-  
-  test('has title 2', async ({ page }) => {
+
+  test('Default approach  Delay 1s', async ({ page }) => {
     await page.goto('https://playwright.dev/');
-  
-    await page.waitForTimeout(3000);
-    // Expect a title "to contain" a substring.
+    await page.waitForTimeout(1000);
     const dateValue = await page.evaluate(() => {return Date.now()});
-  
     console.log('DEFAULT: ', dateValue);
+    expect(Number.isInteger(dateValue)).toBeTruthy();
   });
-  
-  test('has title 3', async ({ page }) => {
+
+  test('Default approach  Delay 2s', async ({ page }) => {
     await page.goto('https://playwright.dev/');
-  
-    await page.waitForTimeout(5000);
-    // Expect a title "to contain" a substring.
+    await page.waitForTimeout(2000);
     const dateValue = await page.evaluate(() => {return Date.now()});
-  
     console.log('DEFAULT: ', dateValue);
+    expect(Number.isInteger(dateValue)).toBeTruthy();
   });
-});
